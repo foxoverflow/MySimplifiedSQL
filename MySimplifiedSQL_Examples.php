@@ -24,8 +24,8 @@ There is currently no ETA for a fix for this since you can easily solve it by pe
 */
 foreach($database->rowArray as $row) // Only to be used after a SELECT query ($database->select). If test mode is enabled, the array will be empty.
 {
-	echo "First name:" . $row['FirstName'] . "<br>";
-	echo "Last name:" . $row['LastName'] . "<br>";
+	echo "First name:" . htmlentities($row['FirstName']) . "<br>"; // htmlentities is used here to combat XSS attack attempts
+	echo "Last name:" . htmlentities($row['LastName']) . "<br>";
 }
 $database->delete("users", array("FirstName" => "John", "LastName" => "Smith")); // "DELETE FROM users WHERE FirstName='John' AND LastName='Smith'" - Works like $database->select
 // If you want more control over your queries, you can manually build an SQL Query, also known as direct query.
